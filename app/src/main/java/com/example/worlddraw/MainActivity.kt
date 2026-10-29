@@ -39,7 +39,7 @@ class MainActivity : Activity() {
         val modeBtn = Button(this).apply {
             text = "Pan"
             setOnClickListener {
-                drawing.drawMode = !overlay.drawMode
+                drawing.drawMode = !drawing.drawMode
                 text = if (drawing.drawMode) "Draw" else "Pan"
             }
         }
