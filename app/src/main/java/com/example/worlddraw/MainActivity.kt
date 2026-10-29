@@ -23,7 +23,7 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Configuration.getInstance().load(applicationContext, getSharedPreferences("osm", MODE_PRIVATE))
-        Configuration.getInstance().userAgentValue = packageName
+        Configuration.getInstance().userAgentValue = "WorldDrawApp/1.0 (138uncia@gmail.com)"
 
         map = MapView(this).apply {
             setTileSource(TileSourceFactory.MAPNIK)
