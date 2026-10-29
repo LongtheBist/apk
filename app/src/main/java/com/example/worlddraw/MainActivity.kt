@@ -16,7 +16,7 @@ import org.osmdroid.views.MapView
 
 class MainActivity : Activity() {
     private lateinit var map: MapView
-    private val overlay = DrawOverlay()
+    private val drawing = DrawOverlay()
 
     private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
 
@@ -33,18 +33,18 @@ class MainActivity : Activity() {
             setScrollableAreaLimitLatitude(85.0, -85.0, 0)
             controller.setZoom(3.0)
             controller.setCenter(GeoPoint(25.0, 10.0))
-            overlays.add(overlay)
+            overlays.add(drawing)
         }
 
         val modeBtn = Button(this).apply {
             text = "Pan"
             setOnClickListener {
-                overlay.drawMode = !overlay.drawMode
-                text = if (overlay.drawMode) "Draw" else "Pan"
+                drawing.drawMode = !overlay.drawMode
+                text = if (drawing.drawMode) "Draw" else "Pan"
             }
         }
-        val undoBtn = Button(this).apply { text = "Undo"; setOnClickListener { overlay.undo(); map.invalidate() } }
-        val clearBtn = Button(this).apply { text = "Clear"; setOnClickListener { overlay.clear(); map.invalidate() } }
+        val undoBtn = Button(this).apply { text = "Undo"; setOnClickListener { drawing.undo(); map.invalidate() } }
+        val clearBtn = Button(this).apply { text = "Clear"; setOnClickListener { drawing.clear(); map.invalidate() } }
 
         val bar = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
@@ -56,8 +56,8 @@ class MainActivity : Activity() {
                 addView(View(context).apply {
                     background = GradientDrawable().apply { shape = GradientDrawable.OVAL; setColor(col) }
                     setOnClickListener {
-                        overlay.color = col
-                        overlay.drawMode = true
+                        drawing.color = col
+                        drawing.drawMode = true
                         modeBtn.text = "Draw"
                     }
                 }, LinearLayout.LayoutParams(dp(32), dp(32)).apply { setMargins(dp(6), 0, dp(6), 0) })
